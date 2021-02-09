@@ -1,4 +1,4 @@
-import React, {Component} from "react"
+import React, {useState} from "react"
 import IngredientList from "./IngredientList";
 import BurgerPane from "./BurgerPane"
 import IngredientItems from './IngredientItems'
@@ -16,37 +16,57 @@ const ingredients=[
   {name: 'Bacon', color: 'maroon'},
   {name: 'Onion', color: 'lightyellow'}
 ]
+function App(){
+  const [burgerIngridients,setBurgerIngridienta]=useState([])
+  const addBurgerIngridients=(e)=>{
+    console.log(e.target.innerText)
+    let currentBurger=burgerIngridients
+    currentBurger.push({name:e.target.innerText, color:e.target.style})
+    setBurgerIngridienta(currentBurger)
+  }
+  const clearBurger=()=>{
+    setBurgerIngridienta([])
+  }
+  
+  return(
+    <div style={{display: "flex"}}>
 
-class App extends Component{
-    
-  state={
-    burgerIngredients: []
-  }
-  addToBurger=(e)=>{
-    console.log(e.target.style)
-    let currentBurger=this.state.burgerIngredients
-    currentBurger.push({
-      name:e.target.innerText,
-      color:e.target.style.backgroundColor
-    })
-    this.setState({burgerIngredients:currentBurger})
-  }
-  clearBurger=(e)=>{
-    this.setState({
-      burgerIngredients:[]
-    })
-  }
-  render(){
-    // btw adding data, prop handling, state, functions, etc.
-
-    return(
-      <div style={{display: "flex"}}>
-        {console.log("")}
-          <IngredientList ingredients={ingredients} addToBurger={this.addToBurger}/>
-          <BurgerPane clearBurger={this.clearBurger} burgerIngredients={this.state.burgerIngredients}/>
-      </div>
-    )
-  }
+      <IngredientList ingredients={ingredients} addBurgerIngridients={addBurgerIngridients}/>
+      <BurgerPane ingredients={burgerIngridients} clearBurger={clearBurger}/>
+    </div>
+  )
 }
+
+// class App extends Component{
+    
+//   state={
+//     burgerIngredients: []
+//   }
+//   addToBurger=(e)=>{
+//     console.log(e.target.style)
+//     let currentBurger=this.state.burgerIngredients
+//     currentBurger.push({
+//       name:e.target.innerText,
+//       color:e.target.style.backgroundColor
+//     })
+//     this.setState({burgerIngredients:currentBurger})
+//   }
+//   clearBurger=(e)=>{
+//     this.setState({
+//       burgerIngredients:[]
+//     })
+//   }
+//   render(){
+//     // btw adding data, prop handling, state, functions, etc.
+
+//     return(
+//       <div style={{display: "flex"}}>
+//         {console.log("")}
+//           <IngredientList ingredients={ingredients} addToBurger={this.addToBurger}/>
+//           <BurgerPane clearBurger={this.clearBurger} burgerIngredients={this.state.burgerIngredients}/>
+//       </div>
+//     )
+//   }
+// }
 
 export default App;
