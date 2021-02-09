@@ -18,7 +18,7 @@ const ingredients=[
 ]
 
 class App extends Component{
- 
+    
   state={
     burgerIngredients: []
   }
@@ -41,6 +41,7 @@ class App extends Component{
 
     return(
       <div style={{display: "flex"}}>
+        {console.log("")}
           <IngredientList ingredients={ingredients} addToBurger={this.addToBurger}/>
           <BurgerPane clearBurger={this.clearBurger} burgerIngredients={this.state.burgerIngredients}/>
       </div>
